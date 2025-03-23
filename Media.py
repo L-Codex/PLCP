@@ -1,5 +1,10 @@
-num1 = float(input("Digite o primeiro numero: "))
-num2 = float(input("Digite o segundo numero: "))
-num3 = float(input("Digite o terceiro numero: "))
-media = (num1 + num2 + num3) / 3 
-print(f"A média dos números é: {media}")    
+# Solicita que o usuário insira três números
+numero1 = float(input("Digite o primeiro número: "))
+numero2 = float(input("Digite o segundo número: "))
+numero3 = float(input("Digite o terceiro número: "))
+
+# Calcula a média
+media = (numero1 + numero2 + numero3) / 3
+
+# Exibe a média
+print(f'A média é: {media}')
