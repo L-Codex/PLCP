@@ -1,4 +1,3 @@
-# Solicita que o usuário insira um número inteiro positivo
 numero = int(input("Digite um número inteiro positivo para a contagem regressiva: "))
 
 # Verifica se o número é positivo
