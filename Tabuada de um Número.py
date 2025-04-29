@@ -1,7 +1,12 @@
-numero = int(input("Digite um número para ver sua tabuada: "))
+def tabuada(numero):
+    for i in range(1, 11):
+        resultado = numero * i
+        print(f"{numero} x {i} = {resultado}")
 
-print(f"\nTabuada de {numero}:")
+def main():
+    numero = int(input("Digite um número para ver sua tabuada: "))
+    print(f"\nTabuada de {numero}:")
+    tabuada(numero)
 
-for i in range(1, 11):
-    resultado = numero * i
-    print(f"{numero} x {i} = {resultado}")
+if __name__ == '__main__':
+    main()
