@@ -6,7 +6,7 @@ def fatorial(n):
 
 def main():
     n = int(input('Digite um número: '))
-    res = fatorial(n) # ou math.factorial(n)
+    res = fatorial(n)
     print(f'O resultado é: {res}')
 
 if __name__ == '__main__':
