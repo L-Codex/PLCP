@@ -1,8 +1,12 @@
-numero = float(input("Digite um número: "))
+def verificar_sinal(numero):
+    if numero > 0:
+        return "positivo"
+    elif numero < 0:
+        return "negativo"
+    else:
+        return "zero"
 
-if numero > 0:
-    print("O número é positivo.")
-elif numero < 0:
-    print("O número é negativo.")
-else:
-    print("O número é zero.")
+def main():
+    numero = float(input("Digite um número: "))
+    resultado = verificar_sinal(numero)
+    print(f"O
