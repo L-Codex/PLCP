@@ -1,3 +1,4 @@
+#include <limits.h>
 #include <locale.h>
 #include <stdbool.h>
 #include <stdio.h>
@@ -114,7 +115,7 @@ bool verificarEmpate(char tabuleiro[3][3]) {
   return true;
 }
 
-int minimax(char tabuleiro[3][3], int profundidade, char jogador, int* lin, int* col) {
+int minimax(char tabuleiro[3][3], int profundidade, char jogador, int* lin, int* col, int alpha, int beta) {
   int melhorValor;
   int melhorLin = -1;
   int melhorCol = -1;
@@ -137,23 +138,35 @@ int minimax(char tabuleiro[3][3], int profundidade, char jogador, int* lin, int*
       if (tabuleiro[l][c] != 'X' && tabuleiro[l][c] != 'O') {
         tabuleiro[l][c] = jogador;
 
-        int valor = minimax(tabuleiro, profundidade - 1, jogador == 'X' ? 'O' : 'X', NULL, NULL);
+        int valor = minimax(tabuleiro, profundidade - 1, jogador == 'X' ? 'O' : 'X', NULL, NULL, alpha, beta);
 
         tabuleiro[l][c] = '1' + l * 3 + c;
 
-        if (jogador == 'O' && valor > melhorValor) {
-          melhorValor = valor;
-          melhorLin   = l;
-          melhorCol   = c;
-        } else if (jogador == 'X' && valor < melhorValor) {
-          melhorValor = valor;
-          melhorLin   = l;
-          melhorCol   = c;
+        if (jogador == 'O') {
+          if (valor > melhorValor) {
+            melhorValor = valor;
+            melhorLin   = l;
+            melhorCol   = c;
+          }
+          alpha = (valor > alpha) ? valor : alpha;
+        } else {
+          if (valor < melhorValor) {
+            melhorValor = valor;
+            melhorLin   = l;
+            melhorCol   = c;
+          }
+          beta = (valor < beta) ? valor : beta;
+        }
+        
+        // Alpha-beta pruning
+        if (beta <= alpha) {
+          goto pruning_done;
         }
       }
     }
   }
 
+pruning_done:
   if (lin && col) {
     *lin = melhorLin;
     *col = melhorCol;
@@ -202,7 +215,7 @@ int main() {
       } else if (modoComputador) {
         printf("Jogador %s%c%s está pensando...\n", GREEN, atual, RESET);
         int lin = -1, col = -1;
-        minimax(tabuleiro, 10, 'O', &lin, &col);
+        minimax(tabuleiro, 10, 'O', &lin, &col, INT_MIN, INT_MAX);
         tabuleiro[lin][col] = atual;
       }
 
