@@ -40,9 +40,9 @@ def main():
         # Entrada: solicita o valor do raio ao usuário
         raio = float(input("Digite o valor do raio: "))
         
-        # Validação: verifica se o raio é positivo
-        if raio < 0:
-            print("Erro: O raio deve ser um valor positivo.")
+        # Validação: verifica se o raio é positivo (maior que zero)
+        if raio <= 0:
+            print("Erro: O raio deve ser um valor positivo maior que zero.")
             return
         
         # Processamento: calcula a área do círculo
